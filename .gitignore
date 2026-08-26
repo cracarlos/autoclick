@@ -1,0 +1,7 @@
+.venv/
+.venv311/
+build/
+dist/
+__pycache__/
+*.pyc
+installer/Output/
