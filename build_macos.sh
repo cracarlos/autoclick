@@ -11,7 +11,7 @@ APP="dist/AutoClick.app"
 
 echo ">>> PyInstaller (app bundle)..."
 rm -rf "$APP"
-"$PY" -m PyInstaller --noconfirm --clean --windowed --onedir --name AutoClick main.py
+"$PY" -m PyInstaller --noconfirm --clean --windowed --onedir --name AutoClick --specpath build main.py
 
 [ -d "$APP" ] || { echo "No se genero $APP"; exit 1; }
 

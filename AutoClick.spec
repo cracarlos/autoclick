@@ -1,4 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
+# Spec onefile para Windows (y compatible con macOS).
+# Usado por el workflow de GitHub Actions y por build_windows.bat.
+# build_macos.sh NO usa este spec (genera el .app con --specpath build).
 
 
 a = Analysis(
@@ -6,7 +9,10 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[],
-    hiddenimports=[],
+    hiddenimports=[
+        'pynput.keyboard._win32',
+        'pynput.mouse._win32',
+    ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -19,8 +25,10 @@ pyz = PYZ(a.pure)
 exe = EXE(
     pyz,
     a.scripts,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
     [],
-    exclude_binaries=True,
     name='AutoClick',
     debug=False,
     bootloader_ignore_signals=False,
@@ -32,19 +40,4 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-)
-coll = COLLECT(
-    exe,
-    a.binaries,
-    a.datas,
-    strip=False,
-    upx=True,
-    upx_exclude=[],
-    name='AutoClick',
-)
-app = BUNDLE(
-    coll,
-    name='AutoClick.app',
-    icon=None,
-    bundle_identifier=None,
 )
